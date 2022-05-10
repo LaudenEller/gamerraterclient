@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import "./Auth.css"
 
 
@@ -27,7 +27,7 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("lu_token", res.token)
-                    history.push("/")
+                    history("/")
                 }
                 else {
                     invalidDialog.current.showModal()
