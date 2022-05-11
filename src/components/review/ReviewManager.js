@@ -1,5 +1,5 @@
-export const getGames = () => {
-    return fetch("http://localhost:8000/games", {
+export const getReviews = () => {
+    return fetch("http://localhost:8000/reviews", {
         headers: {
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
         }
@@ -7,8 +7,8 @@ export const getGames = () => {
         .then(response => response.json())
 }
 
-export const getGame = (gameId) => {
-    return fetch(`http://localhost:8000/games/${gameId}`, {
+export const getReview = (reviewId) => {
+    return fetch(`http://localhost:8000/reviews/${reviewId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
         }
@@ -16,31 +16,31 @@ export const getGame = (gameId) => {
         .then(r => r.json())
 }
 
-export const createGame = (game) => {
-    return fetch("http://localhost:8000/games", {
+export const createReview = (review) => {
+    return fetch("http://localhost:8000/reviews", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
         },
-        body: JSON.stringify(game)
+        body: JSON.stringify(review)
     })
-        // .then(r => r.json())
+        .then(r => r.json())
 }
 
-export const updateGame = (game) => {
-    return fetch(`http://localhost:8000/games/${game.id}`, {
+export const updateReview = (review) => {
+    return fetch(`http://localhost:8000/reviews/${review.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
         },
-        body: JSON.stringify(game)
+        body: JSON.stringify(review)
     })
 };
 
-export const deleteGame = (gameId) => {
-    return fetch(`http://localhost:8000/games/${gameId}`, {
+export const deleteReview = (reviewId) => {
+    return fetch(`http://localhost:8000/reviews/${reviewId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${localStorage.getItem("lu_token")}`
