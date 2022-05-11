@@ -30,6 +30,15 @@ export const GameList = () => {
         <article className="games">
             {
                 games.map(game => {
+                    if (game.editable) { return <>
+                    <Link to={`/games/${game.id}`} key={`game--${game.id}`} className="game">
+                        <div className="game__title">{game.title} by {game.maker}</div>
+                        <div className="game__players">{game.number_of_players} players needed</div>
+                    </Link>
+                    <button onClick={() => history.push({ pathname: `./games/new/${game.id}` })}>Update Game</button>
+                    {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
+                    </>
+} else{
                     return <>
                     <Link to={`/games/${game.id}`} key={`game--${game.id}`} className="game">
                         <div className="game__title">{game.title} by {game.maker}</div>
@@ -37,7 +46,8 @@ export const GameList = () => {
                     </Link>
                     {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
                     </>
-                })
+
+}})
             }
         </article>
         </>
