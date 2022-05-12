@@ -25,7 +25,7 @@ export const createGame = (game) => {
         },
         body: JSON.stringify(game)
     })
-        // .then(r => r.json())
+        .then(r => r.json())
 }
 
 export const updateGame = (game) => {

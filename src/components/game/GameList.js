@@ -34,6 +34,7 @@ export const GameList = () => {
                     <Link to={`/games/${game.id}`} key={`game--${game.id}`} className="game">
                         <div className="game__title">{game.title} by {game.maker}</div>
                         <div className="game__players">{game.number_of_players} players needed</div>
+                        <div className="game-rating">Rating: {game?.average_rating}</div>
                     </Link>
                     <button onClick={() => history.push({ pathname: `./games/new/${game.id}` })}>Update Game</button>
                     {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
@@ -43,6 +44,7 @@ export const GameList = () => {
                     <Link to={`/games/${game.id}`} key={`game--${game.id}`} className="game">
                         <div className="game__title">{game.title} by {game.maker}</div>
                         <div className="game__players">{game.number_of_players} players needed</div>
+                        <div className="game-rating">Average Rating: {game?.average_rating}</div>
                     </Link>
                     {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
                     </>
