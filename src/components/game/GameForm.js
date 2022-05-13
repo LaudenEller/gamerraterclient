@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom'
- import { createGame } from './GameManager.js'
+import { createGame } from './GameManager.js'
 
 
 
@@ -24,8 +24,8 @@ export const GameForm = () => {
 
     const changeGameState = (domEvent) => {
         const copy = { ...currentGame }
-            copy[domEvent.target.name] = domEvent.target.value
-            setCurrentGame(copy)
+        copy[domEvent.target.name] = domEvent.target.value
+        setCurrentGame(copy)
     }
 
     return (
@@ -96,7 +96,7 @@ export const GameForm = () => {
             </fieldset>
             <button type="submit"
                 onClick={evt => {
-                    // Prevent form from being submitted
+
                     evt.preventDefault()
 
                     const game = {
@@ -109,7 +109,6 @@ export const GameForm = () => {
                         maker: currentGame.maker
                     }
 
-                    // Send POST request to your API
                     createGame(game)
                         .then(() => history.push("/games"))
                 }}

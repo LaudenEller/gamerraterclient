@@ -10,15 +10,15 @@ export const UpdateForm = () => {
     const { gameId } = useParams()
     const [game, setGame] = useState({})
 
-    
+
     useEffect(() => {
         getGame(gameId).then((d) => setGame(d))
     }, [gameId])
 
     const changeGameState = (domEvent) => {
         const copy = { ...game }
-            copy[domEvent.target.name] = domEvent.target.value
-            setGame(copy)
+        copy[domEvent.target.name] = domEvent.target.value
+        setGame(copy)
     }
 
     return (
@@ -89,7 +89,7 @@ export const UpdateForm = () => {
             </fieldset>
             <button type="submit"
                 onClick={evt => {
-                    // Prevent form from being submitted
+
                     evt.preventDefault()
 
                     const updatedGame = {
@@ -103,7 +103,6 @@ export const UpdateForm = () => {
                         id: game.id
                     }
 
-                    // Send POST request to your API
                     updateGame(updatedGame)
                         .then(() => history.push(`/games/${gameId}`))
                 }}

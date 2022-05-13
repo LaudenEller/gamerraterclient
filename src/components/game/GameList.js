@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { deleteGame, getGames } from "./GameManager.js"
+import { getGames } from "./GameManager.js"
 import { useHistory } from "react-router-dom"
 import { Link } from "react-router-dom"
 
@@ -11,14 +11,6 @@ export const GameList = () => {
     }, [])
 
     const history = useHistory()
-
-    // const DeleteGame = (id) => {
-    //     deleteGame(id).then(() => Update())
-    // }
-    
-    // const Update = () => {
-    //     getGames().then(data => setGames(data))
-    // }
 
     return (
         <>
@@ -37,7 +29,6 @@ export const GameList = () => {
                         <div className="game-rating">Rating: {game?.average_rating}</div>
                     </Link>
                     <button onClick={() => history.push({ pathname: `./games/new/${game.id}` })}>Update Game</button>
-                    {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
                     </>
 } else{
                     return <>
@@ -46,7 +37,6 @@ export const GameList = () => {
                         <div className="game__players">{game.number_of_players} players needed</div>
                         <div className="game-rating">Average Rating: {game?.average_rating}</div>
                     </Link>
-                    {/* <button className="gameList-button" onClick={() => {DeleteGame(game.id)}}>Delete</button> */}
                     </>
 
 }})

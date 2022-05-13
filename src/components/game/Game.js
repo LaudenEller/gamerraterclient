@@ -3,12 +3,14 @@ import { Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { getGame } from "./GameManager"
-import { createRating } from "./rating/RatingManager"
+import { createRating } from "../rating/RatingManager"
+import { createPicture } from "../picture/PictureManager"
 
 export const Game = () => {
     const [game, setGame] = useState()
     const { gameId } = useParams()
     const [rating, setRating] = useState()
+    const [image, updateImage] = useState("")
 
     useEffect(() => {
         getGame(gameId)
@@ -27,9 +29,27 @@ export const Game = () => {
         setRating(copy)
     }
 
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+    
+    const createGameImageString = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+            console.log("Base64 of file is", base64ImageString);
+            
+            // Update a component state variable to the value of base64ImageString
+            const copy = { ...image }
+            copy[event.target.name] = event.target.value
+            updateImage(copy)
+        }); // INSQ: Is this passing a the results of a function as the second parameter? What's that doing??
+    }
+
     return (
         <>
             <div className='game-container'>
+            <button onClick={() => { history.push(`/games/${gameId}/review`) }}>Review Game</button>
                 <div>
                     <div className="game-title">Title: {game?.title}</div>
                     <div className="game-description">Description: {game?.description}</div>
@@ -76,10 +96,21 @@ export const Game = () => {
                         className="btn btn-primary">
                             Rate this game</button>
                 </form>
-                <button onClick={() => { history.push(`/games/${gameId}/review`) }}>Review Game</button>
                 <ul className="game-reviews">Reviews: {game?.reviews?.map((r) => {
                     return <Link to={`/reviews/${r.id}`} key={`event--${r.id}`} className="review"><li>{r.review}</li></Link>
                 })}</ul>
+                 <input type="file" id="game_image" onChange={createGameImageString} />
+ <input type="hidden" name="game_id" value={gameId} />
+ <button onClick={() => {
+     // Upload the stringified image that is stored in state
+
+     const newImage = {
+         game: gameId,
+         image: image
+ }
+
+     createPicture(newImage)
+ }}>Upload</button>
             </div>
         </>)
 }

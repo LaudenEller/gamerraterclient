@@ -8,11 +8,7 @@ import { createReview } from "./ReviewManager"
 export const ReviewForm = () => {
     const history = useHistory()
     const { gameId } = useParams()
-    /*
-        Since the input fields are bound to the values of
-        the properties of this state variable, you need to
-        provide some default values.
-    */
+
     const [currentReview, setCurrentReview] = useState({
         review: "",
         game: gameId
@@ -25,8 +21,8 @@ export const ReviewForm = () => {
 
     const changeReviewState = (domEvent) => {
         const copy = { ...currentReview }
-            copy[domEvent.target.name] = domEvent.target.value
-            setCurrentReview(copy)
+        copy[domEvent.target.name] = domEvent.target.value
+        setCurrentReview(copy)
     }
 
     return (
@@ -43,7 +39,7 @@ export const ReviewForm = () => {
             </fieldset>
             <button type="submit"
                 onClick={evt => {
-                    // Prevent form from being submitted
+
                     evt.preventDefault()
 
                     const review = {
@@ -51,7 +47,6 @@ export const ReviewForm = () => {
                         game: parseInt(currentReview.game)
                     }
 
-                    // Send POST request to your API
                     createReview(review)
                         .then(() => history.push("./"))
                 }}
